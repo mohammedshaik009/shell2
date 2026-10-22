@@ -9,7 +9,7 @@ echo "movies are: ${MOVIES[2]}"
 
 ARRAY_NAMES=("value1" "value2" "value3")
 
-echo "values are: ${ARRAY_NAME[@]}"
-echo "values are: ${ARRAY_NAME[0]}"
-echo "values are: ${ARRAY_NAME[1]}"
-echo "values are: ${ARRAY_NAME[2]}"
+echo "values are: ${ARRAY_NAMES[@]}"
+echo "values are: ${ARRAY_NAMES[0]}"
+echo "values are: ${ARRAY_NAMES[1]}"
+echo "values are: ${ARRAY_NAMES[2]}"
