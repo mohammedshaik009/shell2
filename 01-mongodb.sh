@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LOGS_FOLDER=/var/log/shell-script
-sudo mkdir -p $LOGS_FOLER
+sudo mkdir -p $LOGS_FOLDER
 sudo chown -R ec2-user:ec2-user $LOGS_FOLDER
 sudo chmod -R 755 $LOGS_FOLDER
 TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
