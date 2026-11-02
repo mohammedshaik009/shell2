@@ -26,7 +26,7 @@ fi
 get_instance_id(){
      name=$1
      aws ec2 describe-instances \
-    --filters "Name=tag:Name,Values=Test" "Name=instance-state-name,Values=running" \
+    --filters "Name=tag:Name,Values=$name" "Name=instance-state-name,Values=running" \
     --query "Reservations[0].Instances[0].InstanceId" \
     --output text
 }
@@ -34,10 +34,10 @@ get_instance_id(){
 for instance in $@
 do
     INSTANCE_ID=$(get_instance_id $instance)
-    if [ "$ACTION" == "create" ]
+    if [ "$ACTION" == "create" ]; then
         if [ "$INSTANCE_ID" == "None" ]; then
             echo "Launching instance: roboshop $instance"
-            INSTANCE_ID=$(aws ec2 run-instances \
+            INSTANCE_ID=$( aws ec2 run-instances \
             --image-id $AMI_ID \
             --instance-type t3.micro \
             --security-groups "roboshop-common" "roboshop-$instance" \
