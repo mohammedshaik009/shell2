@@ -18,7 +18,7 @@ ACTION=$1
 shift   ## first argument will be removed
 
 if [ $ACTION != create ] && [ $ACTION != delete ]; then
-    echo -e "ERROR $R:: first argument either must be create/delete"
+    echo -e "ERROR $R:: first argument either must be create/delete $N"
     echo "usage:: $) [ create/delete] [ instance1 instance2..]"
     exit 1
 fi
