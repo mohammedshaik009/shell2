@@ -46,6 +46,12 @@ do
             --output text
             )
             echo "Launched instance: $INSTANCE_ID"
+            
+
+        else
+            echo "roboshop-$instance is already running: $INSTANCE_ID"
+        fi
+          
             ##update R53_RECORD##
         if [ $instance == frontend ]; then
             IP=$(aws ec2 describe-instances \
@@ -88,7 +94,10 @@ do
     '
     echo "updated R53_RECORD: roboshop-$instance"
     else
-            echo "roboshop-$instance is already running: $INSTANCE_ID"
+        if [ $INSTANCE_ID == None ]; then
+            echo "$instance already destroyed nothing to do ..."
+            aws ec2 terminate-instances --instance-ids $INSTANCE_ID
+
         fi
     fi
 done
