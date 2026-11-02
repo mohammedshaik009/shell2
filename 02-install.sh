@@ -22,3 +22,34 @@ if [ $ACTION != create ] && [ $ACTION != delete ]; then
     echo "usage:: $) [ create/delete] [ instance1 instance2..]"
     exit 1
 fi
+
+get_instance_id(){
+     name=$1
+     aws ec2 describe-instances \
+    --filters "Name=tag:Name,Values=Test" "Name=instance-state-name,Values=running" \
+    --query "Reservations[0].Instances[0].InstanceId" \
+    --output text
+}
+
+for instance in $@
+do
+    INSTANCE_ID=$(get_instance_id $instance)
+    if [ $ACTION == create ]
+        if [ $INSTANCE_ID == NONE ]; then
+            echo "Launching instance: roboshop $instance"
+            INSTANCE_ID=$(aws ec2 run-instances \
+            --image-id $AMI_ID \
+            --instance-type t3.micro \
+            --security-groups "roboshop-common" "roboshop-$instance" \
+            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]" \
+            --query 'Instances[0].InstanceId' \
+            --output text
+            )
+            echo "Launched instance: $INSTANCE_ID"
+        else
+            echo "roboshop $instance already running $INSTANCE_ID"
+        fi
+    fi
+done
+
+        
