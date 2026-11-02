@@ -47,7 +47,7 @@ do
             )
             echo "Launched instance: $INSTANCE_ID"
         else
-            echo "roboshop $instance already running $INSTANCE_ID"
+            echo "roboshop-$instance is already running: $INSTANCE_ID"
         fi
     fi
 done
