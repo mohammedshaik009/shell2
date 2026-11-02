@@ -86,7 +86,7 @@ do
         }
                     
     '
-    echo "updated R53_RECORD: $instance"
+    echo "updated R53_RECORD: roboshop-$instance"
     else
             echo "roboshop-$instance is already running: $INSTANCE_ID"
         fi
